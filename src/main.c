@@ -1,13 +1,14 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "repl.c"
-#include <stdbool.h>
-#include <string.h>
-
 
 int main(int argc, char* argv[], char* envp[]){
- printf("lmao\n"); 
-  repl();
+	printf("project 1\n");
+
+
+
+
+  print_lol();
   return 0;
   
 }
+
