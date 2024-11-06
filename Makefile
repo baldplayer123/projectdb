@@ -5,7 +5,9 @@ CC= gcc
 CO= -Wall -Wextra
 
 ## Source
-SRC = src/main.c src/createdb.c src/usedb.c src/deletedb.c
+SRC = src/main.c src/use.c src/manage_db.c
+
+SRC2 = btreeexample.c
 
 projectdb: 
 	$(CC) $(CO) $(SRC) -o projectdb
@@ -13,4 +15,7 @@ projectdb:
 
 
 clean:
-	rm projectdb
+	rm projectdb example
+
+example: 
+	$(CC) $(CO) $(SRC2) -o example
