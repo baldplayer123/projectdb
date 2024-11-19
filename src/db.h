@@ -1,33 +1,66 @@
 #ifndef DB_H
 #define DB_H
 
-#define MAX_CONTENT_NAME 50
-#define MAX_TABLES 256
+// For rows
+#include <stdio.h>
+#define MAX_CONTENT 256
+#define MAX_NAME 20
+#define MAX_ROWS 256
+// For database
+#define MAX_DB_NAME 20
 
-extern char *databasepath;
+typedef struct Row {
+	int id;
+	char name[MAX_CONTENT];
+	char content[MAX_CONTENT];
 
-// This struct will represent what data will be inside the row, so here it will be the name, director, and a rate of the movie 1-10
-// For now i will store the rating as a int but depending on the way i use this value, it could be changed to a char
-// maybe add a date value, date when you watched the movie
-typedef struct{
-	char name[MAX_CONTENT_NAME];
-	char director[MAX_CONTENT_NAME];
-	int rating;
+} Row ;
 
-} Movies_w ;
+typedef struct Nodes {
+	Row rows;
+	struct Nodes *left;
+	struct Nodes *right;
+} Nodes;
 
-// this struct will be the table that stores all my rows, And there will be a maximum of 256 rows in the table that could be stored
-typedef struct{
-	Movies_w rows[MAX_TABLES];
-	int rows_c;
+
+// This will be the database and pointer to the root node
+
+typedef struct Table {
+	Nodes* root;
 } Table ;
 
+typedef struct Database {
+	char name[20];
+	Nodes *root;
+
+} Database ;
 
 
+// Create node
+Nodes* bt_CreateNode(Row rows);
 
-void createdb();
-void deletedb(); 
-void listdb();
-void insert_db();
-void use();
+// Insert
+Nodes* bt_insert(Nodes* root, Row rows);
+Nodes* AddRow(Nodes *root, int id, char* name, char* content);
+
+//Display
+void displayTable(Table* table);
+void bt_traverse(Nodes* root); 
+
+// Search
+Row* bt_search(Nodes* root, int id);
+
+// Delete
+Nodes* deleteNode(Nodes* root, int id);
+Nodes* minValue(Nodes *root);
+Nodes* noChildren(Nodes *root);
+Nodes* oneChildren(Nodes *root);
+Nodes* twoChildren(Nodes *root);
+
+// Free
+void freeTree(Nodes* root);
+
+// Database
+void saveTree(Nodes* node, FILE* file);
+
 #endif
