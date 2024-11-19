@@ -1,5 +1,5 @@
 # Projet database in C
-    L'objectif du projet est de faire une base de donnée en C utilisant un binary tree pour le stockage des données.
+    Main goal of the project is to make a database and learn how to code in C
 
 ## Compiler flag and version:
     Compiler flag: -Wall -Wextra
